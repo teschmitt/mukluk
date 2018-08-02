@@ -1,0 +1,15 @@
+Contents of Shop
+
+{% for product in object_list %}
+      <div class="row">
+        <div class="col-md-4">
+          <p>{{ product.user }}</p>
+        </div>
+        <div class="col-md-4">
+          <p><a href="{% url 'designedproduct_detail' product.slug %}">{{ product.title }}</a></p>
+        </div>
+        <div class="col-md-4">
+          <p>{{ shop.products_count }}</p>
+        </div>
+      </div>
+      {% endfor %}
