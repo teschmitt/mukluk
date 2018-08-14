@@ -7,11 +7,16 @@ from mezzanine.core.models import Ownable, TimeStamped, MetaData, Displayable
 from mezzanine.pages.models import RichText, Page
 from mezzanine.utils.models import upload_to
 
-from cartridge.shop.models import Product, BaseProduct
+from cartridge.shop.models import Product, BaseProduct, Priced
 from cartridge.shop.fields import MoneyField
 
 
-class DesignAsset(Ownable, TimeStamped, MetaData):
+class Profile(TimeStamped):
+    user = models.OneToOneField("auth.User")
+    date_of_birth = models.DateField(null=True)
+
+
+class DesignAsset(TimeStamped, MetaData):
 
     """
     An asset used to design a DesignedProduct.
@@ -22,8 +27,10 @@ class DesignAsset(Ownable, TimeStamped, MetaData):
     Still missing:
       - Positioning information
     """
-
-    file = FileField(_("Asset"), max_length=255, format="Asset File",
+    vendor = models.ForeignKey(
+        Profile, related_name="design_assets", on_delete=models.CASCADE)
+    file = FileField(
+        _("Asset"), max_length=255, format="Asset File",
         upload_to=upload_to("shop.DesignAsset.file", "asset"))
 
     class Meta:
@@ -32,40 +39,46 @@ class DesignAsset(Ownable, TimeStamped, MetaData):
         app_label = "mukluk"
 
 
-class DesignedProduct(Ownable, BaseProduct):
+class Brand(Displayable, RichText):
+
+    class Meta:
+        verbose_name = _("Brand")
+        verbose_name_plural = _("Brands")
+        app_label = "mukluk"
+
+
+class InventoryProduct(BaseProduct, Priced, RichText):
 
     """
-    Model for user designed products
+    Model for inventory products
     Includes a markup on the product price.
 
     Missing:
       - Number of colors used in the design
     """
 
-    product = models.ForeignKey(Product, related_name="designed_products")
-    asset = models.ForeignKey(DesignAsset, related_name="designed_products")
-    markup = MoneyField(_("Markup"))
+    price = MoneyField
 
     class Meta:
-        verbose_name = _("Designed Product")
-        verbose_name_plural = _("Designed Products")
+        verbose_name = _("Inventory Product")
+        verbose_name_plural = _("Inventory Products")
         app_label = "mukluk"
 
 
-class UserShop(RichText, Ownable, Displayable):
+class VendorShop(RichText, Displayable):
 
     """
-    User shops for designed products
+    Vendor shops for designed products
     """
 
-    products = models.ManyToManyField(
-        DesignedProduct, blank=True, verbose_name=_("Designed Products"))
+    vendor = models.ForeignKey(
+        Profile, related_name="vendor_shops", on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         slug = self.slug
         return reverse("shop_content", kwargs={"shop_slug": slug})
 
     class Meta:
-        verbose_name = _("User Shop")
-        verbose_name_plural = _("User Shops")
+        verbose_name = _("Vendor Shop")
+        verbose_name_plural = _("Vendor Shops")
         app_label = "mukluk"

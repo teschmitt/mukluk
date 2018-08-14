@@ -1,20 +1,20 @@
 from django.views.generic import ListView, DetailView
 
-from mukluk.models import UserShop, DesignedProduct
+from mukluk.models import VendorShop, InventoryProduct
 
 
 class ShopList(ListView):
-    model = UserShop
+    model = VendorShop
 
 
 class ShopContent(ListView):
-    model = DesignedProduct
+    model = InventoryProduct
     template_name = 'mukluk/usershopcontent_list.html'
 
     def get_queryset(self):
         slug = self.kwargs.get('shop_slug', None)
-        return DesignedProduct.objects.filter(usershop__slug=slug)
+        return InventoryProduct.objects.filter(usershop__slug=slug)
 
 
 class DesignedProductDetail(DetailView):
-    model = DesignedProduct
+    model = InventoryProduct

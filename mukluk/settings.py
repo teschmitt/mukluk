@@ -142,26 +142,44 @@ ADMIN_MENU_ORDER = (
 # args and a dictionary of keyword args, to use when creating the
 # field instance. When specifying the field class, the path
 # ``django.models.db.`` can be omitted for regular Django model fields.
-#
-# EXTRA_MODEL_FIELDS = (
-#     (
-#         # Dotted path to field.
-#         "mezzanine.blog.models.BlogPost.image",
-#         # Dotted path to field class.
-#         "somelib.fields.ImageField",
-#         # Positional args for field class.
-#         (_("Image"),),
-#         # Keyword args for field class.
-#         {"blank": True, "upload_to": "blog"},
-#     ),
-#     # Example of adding a field to *all* of Mezzanine's content types:
-#     (
-#         "mezzanine.pages.models.Page.another_field",
-#         "IntegerField", # 'django.db.models.' is implied if path is omitted.
-#         (_("Another name"),),
-#         {"blank": True, "default": 1},
-#     ),
-# )
+
+EXTRA_MODEL_FIELDS = (
+    (
+        # Dotted path to field.
+        # Dotted path to field class.
+        # Positional args for field class.
+        # Keyword args for field class.
+        "cartridge.shop.models.product.inventory_product",
+        "ForeignKey",
+        (("mukluk.InventoryProduct"),),
+        {},
+    ),
+    (
+        "cartridge.shop.models.product.vendor",
+        "ForeignKey",
+        (("mukluk.Profile"),),
+        {},
+    ),
+    (
+        "cartridge.shop.models.product.vendor_shop",
+        "ManyToManyField",
+        (("mukluk.VendorShop"),),
+        {},
+    ),
+    (
+        "cartridge.shop.models.product.design_asset",
+        "ForeignKey",
+        (("mukluk.DesignAsset"),),
+        {},
+    ),
+    (
+        "cartridge.shop.models.product.markup",
+        "cartridge.shop.fields.MoneyField",
+        (_("Markup"),),
+        {"blank": True},
+    ),
+)
+
 
 # Setting to turn on featured images for blog posts. Defaults to False.
 #
@@ -338,10 +356,11 @@ INSTALLED_APPS = (
     "mezzanine.forms",
     "mezzanine.galleries",
     "mezzanine.twitter",
-    # "mezzanine.accounts",
+    "mezzanine.accounts",
     'mukluk',
 )
 
+ACCOUNTS_VERIFICATION_REQUIRED = True
 
 # List of middleware classes to use. Order is important; in the request phase,
 # these middleware classes will be applied in the order given, and in the
