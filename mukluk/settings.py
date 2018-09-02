@@ -65,7 +65,6 @@ from django.utils.translation import ugettext_lazy as _
 SHOP_OPTION_TYPE_CHOICES = (
     (1, "Size"),
     (2, "Colour"),
-    (3, "CMYK")
 )
 
 # Sequence of indexes from the SHOP_OPTION_TYPE_CHOICES setting that
@@ -88,16 +87,16 @@ SHOP_OPTION_TYPE_CHOICES = (
 # Controls the ordering and grouping of the admin menu.
 
 ADMIN_MENU_ORDER = (
-    (_("Marketplace"), (
-        "mukluk.UserShop",
-        "mukluk.DesignedProduct",
-        "mukluk.DesignAsset",
+    (_("Management"), (
+        "shop.Product",
+        "shop.ProductOption",
+        "mukluk.Brand",
         "shop.DiscountCode",
         "shop.Sale",
         "shop.Order",)),
-    (_("Inventory"), (
-        "shop.Product",
-        "shop.ProductOption",)),
+    (_("Marketplace"), (
+        "mukluk.DesignedProduct",
+        "mukluk.VendorShop",)),
     ("Users", (
         "auth.User",
         "auth.Group",)),
@@ -144,41 +143,26 @@ ADMIN_MENU_ORDER = (
 # ``django.models.db.`` can be omitted for regular Django model fields.
 
 EXTRA_MODEL_FIELDS = (
+    # (
+    #     Dotted path to field.
+    #     Dotted path to field class.
+    #     Positional args for field class.
+    #     Keyword args for field class.
+    # ),
     (
-        # Dotted path to field.
-        # Dotted path to field class.
-        # Positional args for field class.
-        # Keyword args for field class.
-        "cartridge.shop.models.product.inventory_product",
+        "cartridge.shop.models.product.brand",
         "ForeignKey",
-        (("mukluk.InventoryProduct"),),
+        (("mukluk.Brand"),),
         {},
-    ),
-    (
-        "cartridge.shop.models.product.vendor",
-        "ForeignKey",
-        (("mukluk.Profile"),),
-        {},
-    ),
-    (
-        "cartridge.shop.models.product.vendor_shop",
-        "ManyToManyField",
-        (("mukluk.VendorShop"),),
-        {},
-    ),
-    (
-        "cartridge.shop.models.product.design_asset",
-        "ForeignKey",
-        (("mukluk.DesignAsset"),),
-        {},
-    ),
-    (
-        "cartridge.shop.models.product.markup",
-        "cartridge.shop.fields.MoneyField",
-        (_("Markup"),),
-        {"blank": True},
     ),
 )
+
+
+MIGRATION_MODULES = {
+    "shop": "mukluk.migrations.cartridge_migrations",
+    "mukluk": "mukluk.migrations.mukluk_migrations",
+}
+
 
 
 # Setting to turn on featured images for blog posts. Defaults to False.
@@ -356,10 +340,11 @@ INSTALLED_APPS = (
     "mezzanine.forms",
     "mezzanine.galleries",
     "mezzanine.twitter",
-    "mezzanine.accounts",
     'mukluk',
+    "mezzanine.accounts",
 )
 
+ACCOUNTS_PROFILE_MODEL = "mukluk.Profile"
 ACCOUNTS_VERIFICATION_REQUIRED = True
 
 # List of middleware classes to use. Order is important; in the request phase,

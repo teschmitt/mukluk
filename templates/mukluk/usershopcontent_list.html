@@ -6,7 +6,7 @@ Contents of Shop
           <p>{{ product.user }}</p>
         </div>
         <div class="col-md-4">
-          <p><a href="{% url 'designedproduct_detail' product.slug %}">{{ product.title }}</a></p>
+          <p><a href="{% url 'designed_product' shop_slug=product.vendor_shop.slug product_slug=product.slug %}">{{ product.title }}</a></p>
         </div>
         <div class="col-md-4">
           <p>{{ shop.products_count }}</p>

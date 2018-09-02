@@ -29,11 +29,11 @@ if settings.USE_MODELTRANSLATION:
     ]
 
 urlpatterns += [
-    url('^shops/$', ShopList.as_view(), name='shop_list'),
-    url('^shop/(?P<shop_slug>[\w-]+)/$',
+    url('^marketplace/$', ShopList.as_view(), name='shop_list'),
+    url(r'^shop/(?P<shop_slug>[\w-]+)/product/(?P<product_slug>[\w-]+)/$',
+        DesignedProductDetail.as_view(), name='designed_product'),
+    url(r'^shop/(?P<shop_slug>[\w-]+)/$',
         ShopContent.as_view(), name='shop_content'),
-    url('^shop/(?P<shop_slug>[\w-]+)/product/(?P<product_slug>[\w-]+)/$',
-        DesignedProductDetail.as_view(), name='designedproduct_detail'),
 
     # Cartridge URLs.
     url("^shop/", include("cartridge.shop.urls")),
