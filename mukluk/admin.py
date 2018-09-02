@@ -10,7 +10,7 @@ from cartridge.shop.forms import ImageWidget
 from cartridge.shop.models import Product
 
 from mukluk.models import (
-    VendorShop, DesignedProduct, DesignAsset, Brand, DesignAsset)
+    VendorShop, DesignedProduct, DesignAsset, Brand, DesignAsset, DesignedProductImage)
 
 
 shop_extra_fieldsets = ((None, {"fields": ("vendor", "content")}),)
@@ -28,12 +28,17 @@ class DesignAssetAdmin(TabularDynamicInlineAdmin):
     formfield_overrides = {ImageField: {"widget": ImageWidget}}
 
 
+class DesignedProductImageAdmin(TabularDynamicInlineAdmin):
+    model = DesignedProductImage
+    formfield_overrides = {ImageField: {"widget": ImageWidget}}
+
+
 class VendorShopAdmin(DisplayableAdmin):
     fieldsets = deepcopy(DisplayableAdmin.fieldsets) + shop_extra_fieldsets
 
 
 class DesignedProductAdmin(DisplayableAdmin):
-    inlines = (DesignAssetAdmin,)
+    inlines = (DesignAssetAdmin, DesignedProductImageAdmin,)
     fieldsets = designed_product_fieldsets
 
 
