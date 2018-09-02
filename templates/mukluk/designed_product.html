@@ -1,0 +1,91 @@
+{% extends "shop/base.html" %}
+{% load staticfiles mezzanine_tags shop_tags rating_tags i18n %}
+
+{% block meta_title %}{{ designed_product.meta_title }}{% endblock %}
+{% block body_id %}category{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% for keyword in designed_product.keywords.all %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ designed_product.description }}
+{% endmetablock %}{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static "mezzanine/css/magnific-popup.css" %}">
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script src="{% static "mezzanine/js/magnific-popup.js" %}"></script>
+<script>
+$(document).ready(function() {
+    $('#product-images-large').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        gallery: {
+            enabled: true,
+        }
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<script>var variations = {{ variations_json|safe }};</script>
+<script src="{% static "cartridge/js/product_variations.js" %}"></script>
+{% endblock %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li>{{ designed_product.title }}</li>
+{% endblock %}
+
+{% block title %}
+{% editable designed_product.title %}{{ designed_product.title }}{% endeditable %}
+{% endblock %}
+
+{% block main %}
+
+{% if images %}
+{% spaceless %}
+<ul id="product-images-large" class="list-unstyled list-inline">
+    {% for image in images %}
+    <li id="image-{{ image.id }}-large"{% if not forloop.first %}style="display:none;"{% endif %}>
+        <a class="product-image-large" href="{{ MEDIA_URL }}{{ image.file }}">
+            <img alt="{{ image.description }}" src="{{ MEDIA_URL }}{% thumbnail image.file 0 300 %}" class="img-thumbnail img-responsive col-xs-12">
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% if images|length != 1 %}
+<ul id="product-images-thumb" class="list-unstyled list-inline">
+    {% for image in images %}
+    <li>
+        <a class="thumbnail" id="image-{{ image.id }}" href="{{ MEDIA_URL }}{{ image.file }}">
+            <img alt="{{ image.description }}" src="{{ MEDIA_URL }}{% thumbnail image.file 75 75 %}">
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endspaceless %}
+{% endif %}
+
+{% editable designed_product.content %}
+{{ designed_product.content|richtext_filters|safe }}
+{% endeditable %}
+
+
+
+
+
+{% endblock %}

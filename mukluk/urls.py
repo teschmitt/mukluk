@@ -9,7 +9,7 @@ from mezzanine.conf import settings
 
 from cartridge.shop.views import order_history
 
-from mukluk.views import ShopList, ShopContent, DesignedProductDetail
+from mukluk.views import ShopList, ShopContent, designed_product
 
 admin.autodiscover()
 
@@ -31,7 +31,7 @@ if settings.USE_MODELTRANSLATION:
 urlpatterns += [
     url('^marketplace/$', ShopList.as_view(), name='shop_list'),
     url(r'^shop/(?P<shop_slug>[\w-]+)/product/(?P<product_slug>[\w-]+)/$',
-        DesignedProductDetail.as_view(), name='designed_product'),
+        designed_product, name='designed_product'),
     url(r'^shop/(?P<shop_slug>[\w-]+)/$',
         ShopContent.as_view(), name='shop_content'),
 

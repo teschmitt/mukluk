@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 
 from mezzanine.core.fields import FileField
 from mezzanine.core.models import (
-    TimeStamped, MetaData, Displayable, ContentTyped)
+    TimeStamped, MetaData, Displayable, ContentTyped, Orderable)
 from mezzanine.pages.models import RichText
 from mezzanine.utils.models import upload_to
 
@@ -82,6 +82,27 @@ class DesignedProduct(Displayable, RichText, ContentTyped):
     def save(self, *args, **kwargs):
         self.set_content_model()
         super().save(*args, **kwargs)
+
+
+class DesignedProductImage(Orderable):
+    """
+    An image for a DesignedProduct. Heavily borrows from the
+    core ProductImage model.DesignedProduct
+    """
+    file = FileField(
+        _("Image"), max_length=255, format="Image",
+        upload_to=upload_to("shop.DeisgnedProductImage.file", "product"))
+    description = models.CharField(_("Description"), blank=True, max_length=100)
+    designed_product = models.ForeignKey(DesignedProduct, related_name="images")
+
+    class Meta:
+        verbose_name = _("Image")
+        verbose_name_plural = _("Images")
+        order_with_respect_to = "designed_product"
+
+    def __str__(self):
+        value = self.description or self.file.name or ""
+        return value
 
 
 class DesignAsset(TimeStamped, MetaData):
