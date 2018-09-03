@@ -64,6 +64,22 @@ class DesignedProduct(Displayable, RichText, ContentTyped):
     markup = MoneyField(_('Markup'))
     sku = SKUField(blank=True, null=True)
 
+    class Meta:
+        verbose_name = _("Designed Product")
+        verbose_name_plural = _("Designed Products")
+        app_label = "mukluk"
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def image(self):
+        """
+        Return the first image associated with the DesignedProduct
+        """
+        return DesignedProductImage.objects.filter(
+            designed_product=self)[0]
+
     def price(self):
         return self.base.price() + self.markup
 
@@ -73,11 +89,6 @@ class DesignedProduct(Displayable, RichText, ContentTyped):
         return reverse("designed_product", kwargs={
             "shop_slug": shop_slug,
             "product_slug": product_slug})
-
-    class Meta:
-        verbose_name = _("Designed Product")
-        verbose_name_plural = _("Designed Products")
-        app_label = "mukluk"
 
     def save(self, *args, **kwargs):
         self.set_content_model()

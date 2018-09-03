@@ -32,8 +32,8 @@ urlpatterns += [
     url('^marketplace/$', ShopList.as_view(), name='shop_list'),
     url(r'^shop/(?P<shop_slug>[\w-]+)/product/(?P<product_slug>[\w-]+)/$',
         designed_product, name='designed_product'),
-    url(r'^shop/(?P<shop_slug>[\w-]+)/$',
-        ShopContent.as_view(), name='shop_content'),
+    # url(r'^shop/(?P<shop_slug>[\w-]+)/$',
+    #     ShopContent.as_view(), name='shop_content'),
 
     # Cartridge URLs.
     url("^shop/", include("cartridge.shop.urls")),

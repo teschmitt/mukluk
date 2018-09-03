@@ -1,13 +1,30 @@
 from json import dumps
 
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
 from django.template.response import TemplateResponse
+from django.contrib.messages import info
+from django.utils.translation import (ugettext, ugettext_lazy as _,
+                                      pgettext_lazy as __)
+from django.utils.encoding import force_text
 
+
+from mezzanine.conf import settings
+
+from cartridge.shop.utils import recalculate_cart
 from cartridge.shop.forms import AddProductForm
 from cartridge.shop.models import Product, ProductVariation
 
 from mukluk.models import VendorShop, DesignedProduct
+
+
+def modify_cart_desc(variation_str: None, designed_product: None):
+    """
+    This is going to return a function that replaces the __str__ method of the
+    underlying ProductVariant of the DesignedProduct in order to modify
+    the description of the item being added to the cart
+    """
+    return lambda: '{} -- {}'.format(designed_product, variation_str)
 
 
 class ShopList(ListView):
@@ -22,18 +39,7 @@ class ShopContent(ListView):
         slug = self.kwargs.get('shop_slug', None)
         return DesignedProduct.objects.filter(vendor_shop__slug=slug)
 
-
-class DesignedProductDetail(DetailView):
-    model = DesignedProduct
-    slug_url_kwarg = 'product_slug'
-    context_object_name = 'product'
-
-    # def get_queryset(self):
-    #     shop_slug = self.kwargs.get('shop_slug', None)
-    #     product_slug = self.kwargs.get('product_slug', None)
-    #     return DesignedProduct.objects.filter(slug=product_slug)
-
-
+# CHANGE THE ADDPRODUCTFORM TO CUSTOM FORM!!!
 def designed_product(request, product_slug, shop_slug,
                      template="mukluk/designed_product.html",
                      form_class=AddProductForm, extra_context=None):
@@ -55,6 +61,34 @@ def designed_product(request, product_slug, shop_slug,
     initial_data["quantity"] = 1
     add_product_form = form_class(request.POST or None, product=base,
                                   initial=initial_data, to_cart=to_cart)
+    if request.method == "POST":
+        if add_product_form.is_valid():
+            if to_cart:
+                # Here begins The Hackery:
+                var = add_product_form.variation
+                var.sku = '{}-{}'.format(var.sku, designed_product.sku)
+                var.__str__ = modify_cart_desc(force_text(var), designed_product)
+                var.product.get_absolute_url = designed_product.get_absolute_url
+                var.image.file.name = designed_product.image.file.name
+
+                quantity = add_product_form.cleaned_data["quantity"]
+                request.cart.add_item(var, quantity)
+                recalculate_cart(request)
+                info(request, _("Item added to cart"))
+                return redirect("shop_cart")
+            else:
+                skus = request.wishlist
+                sku = add_product_form.variation.sku
+                if sku not in skus:
+                    skus.append(sku)
+                info(request, _("Item added to wishlist"))
+                response = redirect("shop_wishlist")
+                set_cookie(response, "wishlist", ",".join(skus))
+                return response
+
+    # related = []
+    # if settings.SHOP_USE_RELATED_PRODUCTS:
+    #     related = product.related_products.published(for_user=request.user)
 
     context = {
         "designed_product": designed_product,
