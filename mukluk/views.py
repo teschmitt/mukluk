@@ -39,7 +39,7 @@ class ShopContent(ListView):
         slug = self.kwargs.get('shop_slug', None)
         return DesignedProduct.objects.filter(vendor_shop__slug=slug)
 
-# CHANGE THE ADDPRODUCTFORM TO CUSTOM FORM!!!
+
 def designed_product(request, product_slug, shop_slug,
                      template="mukluk/designed_product.html",
                      form_class=AddProductForm, extra_context=None):
@@ -64,15 +64,9 @@ def designed_product(request, product_slug, shop_slug,
     if request.method == "POST":
         if add_product_form.is_valid():
             if to_cart:
-                # Here begins The Hackery:
-                var = add_product_form.variation
-                var.sku = '{}-{}'.format(var.sku, designed_product.sku)
-                var.__str__ = modify_cart_desc(force_text(var), designed_product)
-                var.product.get_absolute_url = designed_product.get_absolute_url
-                var.image.file.name = designed_product.image.file.name
-
                 quantity = add_product_form.cleaned_data["quantity"]
-                request.cart.add_item(var, quantity)
+                request.cart.add_item(
+                    add_product_form.variation, designed_product, quantity)
                 recalculate_cart(request)
                 info(request, _("Item added to cart"))
                 return redirect("shop_cart")

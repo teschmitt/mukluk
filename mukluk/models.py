@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_text
+
 from django.core.urlresolvers import reverse
 
 from mezzanine.core.fields import FileField
@@ -8,7 +10,7 @@ from mezzanine.core.models import (
 from mezzanine.pages.models import RichText
 from mezzanine.utils.models import upload_to
 
-from cartridge.shop.models import Product, Priced
+from cartridge.shop.models import Product, Priced, Cart
 from cartridge.shop.fields import MoneyField, SKUField
 
 
@@ -139,16 +141,34 @@ class DesignAsset(TimeStamped, MetaData):
         app_label = "mukluk"
 
 
-# class ProductLink(TimeStamped):
-#     inventory_product = models.ForeignKey(
-#         InventoryProduct, related_name="link_inventory", on_delete=models.CASCADE)
-#     vendor_product = models.ForeignKey(
-#         Product, related_name="link_vendor", on_delete=models.CASCADE)
-#     vendor_shop = models.ForeignKey(
-#         VendorShop, related_name="prouct_link", on_delete=models.CASCADE)
-#     design_asset = models.ForeignKey(
-#         DesignAsset, related_name="product_link", on_delete=models.CASCADE)
-#     markup = MoneyField(_("Markup"))
+# MONKEY PATCHES OF CORE FUNCTIONALITY
+# ------------------------------------
+# Most of the Cartridge core is flexible enough to allow bending the
+# system into a marketplace platform. Some of the core isn't, so
+# this is where all the needed monkey patches for the Cartridge models
+# reside.
 
-#     def vendor_shop_products(self, slug):
-#         self.objects.filter(vendorshop__slug=slug)
+def mukluk_add_item(self, variation, designed_product, quantity):
+        """
+        Modifies the Cartidge's Cart model to enable it to add
+        DesignedProducts to the Cart.
+        """
+        if not self.pk:
+            self.save()
+        kwargs = {
+            "sku": '{}-{}'.format(variation.sku, designed_product.sku),
+            "unit_price": variation.price() + designed_product.markup}
+        item, created = self.items.get_or_create(**kwargs)
+        if created:
+            item.description = '{} ({})'.format(
+                force_text(designed_product), force_text(variation))
+            item.unit_price = variation.price() + designed_product.markup
+            item.url = designed_product.get_absolute_url()
+            image = designed_product.image
+            if image is not None:
+                item.image = force_text(image.file)
+            variation.product.actions.added_to_cart()
+        item.quantity += quantity
+        item.save()
+
+Cart.add_item = mukluk_add_item
