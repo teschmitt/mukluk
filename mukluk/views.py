@@ -1,30 +1,25 @@
 from json import dumps
 
-from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView
-from django.template.response import TemplateResponse
 from django.contrib.messages import info
-from django.utils.translation import (ugettext, ugettext_lazy as _,
-                                      pgettext_lazy as __)
-from django.utils.encoding import force_text
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect
+from django.template.response import TemplateResponse
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import ListView
+from django.views.decorators.cache import never_cache
 
-
-from mezzanine.conf import settings
-
+from cartridge.shop import checkout
 from cartridge.shop.utils import recalculate_cart
 from cartridge.shop.forms import AddProductForm
-from cartridge.shop.models import Product, ProductVariation
+from cartridge.shop.models import Product, ProductVariation, Order
 
 from mukluk.models import VendorShop, DesignedProduct
 
-
-def modify_cart_desc(variation_str: None, designed_product: None):
-    """
-    This is going to return a function that replaces the __str__ method of the
-    underlying ProductVariant of the DesignedProduct in order to modify
-    the description of the item being added to the cart
-    """
-    return lambda: '{} -- {}'.format(designed_product, variation_str)
+try:
+    from xhtml2pdf import pisa
+except (ImportError, SyntaxError):
+    pisa = None
+HAS_PDF = pisa is not None
 
 
 class ShopList(ListView):
@@ -103,3 +98,30 @@ def designed_product(request, product_slug, shop_slug,
         templates.insert(0, u"shop/products/%s.html" % designed_product.content_model)
 
     return TemplateResponse(request, templates, context)
+
+
+@never_cache
+def mukluk_complete(request, template="shop/complete.html", extra_context=None):
+    """
+    Redirected to once an order is complete - pass the order object
+    for tracking items via Google Anayltics, and displaying in
+    the template if required.
+    """
+    try:
+        order = Order.objects.from_request(request)
+    except Order.DoesNotExist:
+        raise Http404
+    items = order.items.all()
+    # Assign product names to each of the items since they're not
+    # stored.
+    skus = [item.sku.split('-')[0] for item in items]
+    variations = ProductVariation.objects.filter(sku__in=skus)
+    names = {}
+    for variation in variations.select_related("product"):
+        names[variation.sku] = variation.product.title
+    for i, item in enumerate(items):
+        setattr(items[i], "name", names[item.sku.split('-')[0]])
+    context = {"order": order, "items": items, "has_pdf": HAS_PDF,
+               "steps": checkout.CHECKOUT_STEPS}
+    context.update(extra_context or {})
+    return TemplateResponse(request, template, context)

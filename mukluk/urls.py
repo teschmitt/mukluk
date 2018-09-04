@@ -4,14 +4,18 @@ from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.views.i18n import set_language
+
 from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
 
+from cartridge.shop import views
 from cartridge.shop.views import order_history
 
-from mukluk.views import ShopList, ShopContent, designed_product
+from mukluk.views import (
+    ShopList, ShopContent, designed_product, mukluk_complete)
 
 admin.autodiscover()
+_slash = "/" if settings.APPEND_SLASH else ""
 
 # Add the urlpatterns for any custom Django applications here.
 # You can also change the ``home`` view to add your own functionality
@@ -34,9 +38,18 @@ urlpatterns += [
         designed_product, name='designed_product'),
     # url(r'^shop/(?P<shop_slug>[\w-]+)/$',
     #     ShopContent.as_view(), name='shop_content'),
-
+    # replaces core complete view:
+    url("^checkout/complete/$", mukluk_complete, name="shop_complete"),
     # Cartridge URLs.
-    url("^shop/", include("cartridge.shop.urls")),
+    url("^product/(?P<slug>.*)%s$" % _slash, views.product,
+        name="shop_product"),
+    url("^wishlist%s$" % _slash, views.wishlist, name="shop_wishlist"),
+    url("^cart%s$" % _slash, views.cart, name="shop_cart"),
+    url("^checkout%s$" % _slash, views.checkout_steps, name="shop_checkout"),
+    url("^invoice/(?P<order_id>\d+)%s$" % _slash, views.invoice,
+        name="shop_invoice"),
+    url("^invoice/(?P<order_id>\d+)/resend%s$" % _slash,
+        views.invoice_resend_email, name="shop_invoice_resend"),
     url("^account/orders/$", order_history, name="shop_order_history"),
 
     # We don't want to presume how your homepage works, so here are a

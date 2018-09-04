@@ -141,8 +141,8 @@ class DesignAsset(TimeStamped, MetaData):
         app_label = "mukluk"
 
 
-# MONKEY PATCHES OF CORE FUNCTIONALITY
-# ------------------------------------
+# MONKEY PATCHES OF CORE MODELS
+# -----------------------------
 # Most of the Cartridge core is flexible enough to allow bending the
 # system into a marketplace platform. Some of the core isn't, so
 # this is where all the needed monkey patches for the Cartridge models
