@@ -79,8 +79,12 @@ class DesignedProduct(Displayable, RichText, ContentTyped):
         """
         Return the first image associated with the DesignedProduct
         """
-        return DesignedProductImage.objects.filter(
-            designed_product=self)[0]
+        try:
+            return DesignedProductImage.objects.filter(
+                designed_product=self)[0] or None
+        except IndexError:
+            # Designed Product has no images
+            return None
 
     def price(self):
         return self.base.price() + self.markup
@@ -95,6 +99,9 @@ class DesignedProduct(Displayable, RichText, ContentTyped):
     def save(self, *args, **kwargs):
         self.set_content_model()
         super().save(*args, **kwargs)
+        if not self.sku:
+            self.sku = self.id
+            self.save()
 
 
 class DesignedProductImage(Orderable):
