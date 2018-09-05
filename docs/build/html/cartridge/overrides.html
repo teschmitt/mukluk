@@ -1,0 +1,184 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Overrides of the Cartridge and Mezzanine Core &#8212; Mukluk 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mukluk" href="../modules.html" />
+    <link rel="prev" title="Quick Start Reference" href="../usage/quickstart.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="overrides-of-the-cartridge-and-mezzanine-core">
+<h1>Overrides of the Cartridge and Mezzanine Core<a class="headerlink" href="#overrides-of-the-cartridge-and-mezzanine-core" title="Permalink to this headline">¶</a></h1>
+<p>Mukluk is based on <a class="reference external" href="http://cartridge.jupo.org">Cartridge</a>, a shopping cart application built using the Django framework and extending the <a class="reference external" href="http://mezzanine.jupo.org/">Mezzanine</a> CMS. As such, some workarounds had to be put in place to support a multi-vendor marketplace solution.</p>
+<p>Following are some notes on the various overrides of the core Cartridge and Mezzanine codebase and how they are performed.</p>
+<div class="section" id="skus">
+<h2>SKUs<a class="headerlink" href="#skus" title="Permalink to this headline">¶</a></h2>
+<p>A lot of cart and order functionality relies on the SKUs that each reference a certain <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductVariant</span></code>. A <a class="reference internal" href="../mukluk.html#mukluk.models.DesignedProduct" title="mukluk.models.DesignedProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">DesignedProduct</span></code></a> is based on a <code class="xref py py-class docutils literal notranslate"><span class="pre">Product</span></code>, but orders are of a certain variant of that product that is then used for printing on the design.</p>
+<p>o easily identify the ordered design as well as the base product unto which it should be printed, modified SKUs are generated and have two parts to them:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>SKU of the <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductVariant</span></code></li>
+</ol>
+</div></blockquote>
+<p>followed by a minus/hyphen (<cite>-</cite>) and then part</p>
+<blockquote>
+<div><ol class="arabic simple" start="2">
+<li>SKU of the <a class="reference internal" href="../mukluk.html#mukluk.models.DesignedProduct" title="mukluk.models.DesignedProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">DesignedProduct</span></code></a></li>
+</ol>
+</div></blockquote>
+<p>Modifying the SKUs in this ways screws up some of Cartridge’s core that is responsible for filtering cart or order items based on the SKU. These workarounds take care of maintaining regular functionality:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="../mukluk.html#module-mukluk.models" title="mukluk.models"><code class="xref py py-mod docutils literal notranslate"><span class="pre">models</span></code></a></dt>
+<dd><dl class="first function">
+<dt>
+<code class="descname">mukluk_add_item</code><span class="sig-paren">(</span><em>self</em>, <em>variation</em>, <em>designed_product</em>, <em>quantity</em><span class="sig-paren">)</span></dt>
+<dd><p>Modifies the Cartidge’s Cart model to enable it to add
+DesignedProducts to the Cart.</p>
+</dd></dl>
+
+<p class="last">Replaces core <code class="xref py py-meth docutils literal notranslate"><span class="pre">Cart.add_item()</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="../mukluk.html#module-mukluk.views" title="mukluk.views"><code class="xref py py-mod docutils literal notranslate"><span class="pre">views</span></code></a></dt>
+<dd><dl class="first function">
+<dt>
+<code class="descname">mukluk_complete</code><span class="sig-paren">(</span><em>request</em>, <em>template='shop/complete.html'</em>, <em>extra_context=None</em><span class="sig-paren">)</span></dt>
+<dd><p>Redirected to once an order is complete - pass the order object
+for tracking items via Google Anayltics, and displaying in
+the template if required.</p>
+</dd></dl>
+
+<p class="last">Gets called as a replacement for the core view <code class="xref py py-func docutils literal notranslate"><span class="pre">complete()</span></code></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="designed-products">
+<h2>Designed Products<a class="headerlink" href="#designed-products" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="../mukluk.html#module-mukluk.views" title="mukluk.views"><code class="xref py py-mod docutils literal notranslate"><span class="pre">views</span></code></a></dt>
+<dd><dl class="first function">
+<dt>
+<code class="descname">designed_product</code><span class="sig-paren">(</span><em>request</em>, <em>product_slug</em>, <em>shop_slug</em>, <em>template='mukluk/designed_product.html'</em>, <em>form_class=&lt;class 'cartridge.shop.forms.AddProductForm'&gt;</em>, <em>extra_context=None</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<p>Gets called to display the product page for a <a class="reference internal" href="../mukluk.html#mukluk.models.DesignedProduct" title="mukluk.models.DesignedProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">DesignedProduct</span></code></a></p>
+<p>The only real changes are in the function definition (<code class="docutils literal notranslate"><span class="pre">product_slug</span></code> and <code class="docutils literal notranslate"><span class="pre">shop_slug</span></code> parameters) and right in the beginning, where the DesignedProduct has to be fetched as well for further processing (cart, order, etc):</p>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">published_dps</span> <span class="o">=</span> <span class="n">DesignedProduct</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">(</span><span class="n">for_user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+<span class="n">designed_product</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">published_dps</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="n">product_slug</span><span class="p">)</span>
+<span class="n">base</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Product</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="n">designed_product</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">slug</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Mukluk</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/quickstart.html">Quick Start Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overrides of the Cartridge and Mezzanine Core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#skus">SKUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#designed-products">Designed Products</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">mukluk</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../usage/quickstart.html" title="previous chapter">Quick Start Reference</a></li>
+      <li>Next: <a href="../modules.html" title="next chapter">mukluk</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Thomas Schmitt.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.8</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="../_sources/cartridge/overrides.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,929 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>mukluk package &#8212; Mukluk 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="mukluk" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="mukluk-package">
+<h1>mukluk package<a class="headerlink" href="#mukluk-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mukluk.admin">
+<span id="mukluk-admin-module"></span><h2>mukluk.admin module<a class="headerlink" href="#module-mukluk.admin" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mukluk.admin.DesignAssetAdmin">
+<em class="property">class </em><code class="descname">DesignAssetAdmin</code><span class="sig-paren">(</span><em>parent_model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.admin.DesignAssetAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.admin.TabularDynamicInlineAdmin</span></code></p>
+<dl class="attribute">
+<dt id="mukluk.admin.DesignAssetAdmin.formfield_overrides">
+<code class="descname">formfield_overrides</code><em class="property"> = {&lt;class 'django.db.models.fields.files.ImageField'&gt;: {'widget': &lt;class 'cartridge.shop.forms.ImageWidget'&gt;}}</em><a class="headerlink" href="#mukluk.admin.DesignAssetAdmin.formfield_overrides" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.admin.DesignAssetAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#mukluk.admin.DesignAssetAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.admin.DesignAssetAdmin.model">
+<code class="descname">model</code><a class="headerlink" href="#mukluk.admin.DesignAssetAdmin.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mukluk.models.DesignAsset" title="mukluk.models.DesignAsset"><code class="xref py py-class docutils literal notranslate"><span class="pre">mukluk.models.DesignAsset</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.admin.DesignedProductAdmin">
+<em class="property">class </em><code class="descname">DesignedProductAdmin</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.admin.DesignedProductAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.admin.DisplayableAdmin</span></code></p>
+<dl class="attribute">
+<dt id="mukluk.admin.DesignedProductAdmin.fieldsets">
+<code class="descname">fieldsets</code><em class="property"> = ((None, {'fields': ['title', 'status', ('publish_date', 'expiry_date'), 'base', 'vendor_shop', 'markup', 'content']}), ('Meta data', {'fields': ['_meta_title', 'slug', ('description', 'gen_description'), 'keywords', 'in_sitemap'], 'classes': ('collapse-closed',)}))</em><a class="headerlink" href="#mukluk.admin.DesignedProductAdmin.fieldsets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.admin.DesignedProductAdmin.inlines">
+<code class="descname">inlines</code><em class="property"> = (&lt;class 'mukluk.admin.DesignAssetAdmin'&gt;, &lt;class 'mukluk.admin.DesignedProductImageAdmin'&gt;)</em><a class="headerlink" href="#mukluk.admin.DesignedProductAdmin.inlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.admin.DesignedProductAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#mukluk.admin.DesignedProductAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.admin.DesignedProductImageAdmin">
+<em class="property">class </em><code class="descname">DesignedProductImageAdmin</code><span class="sig-paren">(</span><em>parent_model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.admin.DesignedProductImageAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.admin.TabularDynamicInlineAdmin</span></code></p>
+<dl class="attribute">
+<dt id="mukluk.admin.DesignedProductImageAdmin.formfield_overrides">
+<code class="descname">formfield_overrides</code><em class="property"> = {&lt;class 'django.db.models.fields.files.ImageField'&gt;: {'widget': &lt;class 'cartridge.shop.forms.ImageWidget'&gt;}}</em><a class="headerlink" href="#mukluk.admin.DesignedProductImageAdmin.formfield_overrides" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.admin.DesignedProductImageAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#mukluk.admin.DesignedProductImageAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.admin.DesignedProductImageAdmin.model">
+<code class="descname">model</code><a class="headerlink" href="#mukluk.admin.DesignedProductImageAdmin.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mukluk.models.DesignedProductImage" title="mukluk.models.DesignedProductImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">mukluk.models.DesignedProductImage</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.admin.MuklukProductAdmin">
+<em class="property">class </em><code class="descname">MuklukProductAdmin</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.admin.MuklukProductAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">cartridge.shop.admin.ProductAdmin</span></code></p>
+<dl class="attribute">
+<dt id="mukluk.admin.MuklukProductAdmin.fieldsets">
+<code class="descname">fieldsets</code><em class="property"> = [(None, {'fields': ['title', 'brand', 'status', 'available', ('publish_date', 'expiry_date'), 'content', 'categories']}), ('Create new variations', {'classes': ('create-variations',), 'fields': ['option1', 'option2']}), ('Meta data', {'fields': ['_meta_title', 'slug', ('description', 'gen_description'), 'keywords', 'in_sitemap'], 'classes': ('collapse-closed',)}), ('Other products', {'classes': ('collapse-closed',), 'fields': ('related_products', 'upsell_products')})]</em><a class="headerlink" href="#mukluk.admin.MuklukProductAdmin.fieldsets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.admin.MuklukProductAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#mukluk.admin.MuklukProductAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.admin.VendorShopAdmin">
+<em class="property">class </em><code class="descname">VendorShopAdmin</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.admin.VendorShopAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.admin.DisplayableAdmin</span></code></p>
+<dl class="attribute">
+<dt id="mukluk.admin.VendorShopAdmin.fieldsets">
+<code class="descname">fieldsets</code><em class="property"> = ((None, {'fields': ['title', 'status', ('publish_date', 'expiry_date')]}), ('Meta data', {'fields': ['_meta_title', 'slug', ('description', 'gen_description'), 'keywords', 'in_sitemap'], 'classes': ('collapse-closed',)}), (None, {'fields': ('vendor', 'content')}))</em><a class="headerlink" href="#mukluk.admin.VendorShopAdmin.fieldsets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.admin.VendorShopAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#mukluk.admin.VendorShopAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mukluk.local_settings">
+<span id="mukluk-local-settings-module"></span><h2>mukluk.local_settings module<a class="headerlink" href="#module-mukluk.local_settings" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mukluk.models">
+<span id="mukluk-models-module"></span><h2>mukluk.models module<a class="headerlink" href="#module-mukluk.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mukluk.models.Brand">
+<em class="property">class </em><code class="descname">Brand</code><span class="sig-paren">(</span><em>id</em>, <em>keywords_string</em>, <em>site</em>, <em>title</em>, <em>slug</em>, <em>_meta_title</em>, <em>description</em>, <em>gen_description</em>, <em>created</em>, <em>updated</em>, <em>status</em>, <em>publish_date</em>, <em>expiry_date</em>, <em>short_url</em>, <em>in_sitemap</em>, <em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.Brand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.Displayable</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.RichText</span></code></p>
+<dl class="exception">
+<dt id="mukluk.models.Brand.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#mukluk.models.Brand.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="mukluk.models.Brand.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#mukluk.models.Brand.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.Brand.get_keywordsfield_name">
+<code class="descname">get_keywordsfield_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.Brand.get_keywordsfield_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.Brand.get_status_display">
+<code class="descname">get_status_display</code><span class="sig-paren">(</span><em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.Brand.get_status_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Brand.id">
+<code class="descname">id</code><a class="headerlink" href="#mukluk.models.Brand.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Brand.keywords">
+<code class="descname">keywords</code><a class="headerlink" href="#mukluk.models.Brand.keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the one-to-many relation created
+by GenericRelation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">GenericRelation</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">post.comments</span></code> is a ReverseGenericManyToOneDescriptor instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Brand.keywords_string">
+<code class="descname">keywords_string</code><a class="headerlink" href="#mukluk.models.Brand.keywords_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Brand.product_set">
+<code class="descname">product_set</code><a class="headerlink" href="#mukluk.models.Brand.product_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Brand.site">
+<code class="descname">site</code><a class="headerlink" href="#mukluk.models.Brand.site" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.models.DesignAsset">
+<em class="property">class </em><code class="descname">DesignAsset</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.DesignAsset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.TimeStamped</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.MetaData</span></code></p>
+<p>An asset used to design a DesignedProduct.
+Right now, all positioning is included in the asset model. This might
+be broken out into a designated model (AssetComposition or something)
+in the future.</p>
+<dl class="docutils">
+<dt>Still missing:</dt>
+<dd><ul class="first last simple">
+<li>Positioning information</li>
+</ul>
+</dd>
+</dl>
+<dl class="exception">
+<dt id="mukluk.models.DesignAsset.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#mukluk.models.DesignAsset.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="mukluk.models.DesignAsset.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#mukluk.models.DesignAsset.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignAsset.designed_product">
+<code class="descname">designed_product</code><a class="headerlink" href="#mukluk.models.DesignAsset.designed_product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignAsset.designed_product_id">
+<code class="descname">designed_product_id</code><a class="headerlink" href="#mukluk.models.DesignAsset.designed_product_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignAsset.file">
+<code class="descname">file</code><a class="headerlink" href="#mukluk.models.DesignAsset.file" title="Permalink to this definition">¶</a></dt>
+<dd><p>The descriptor for the file attribute on the model instance. Returns a
+FieldFile when accessed so you can do stuff like:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">myapp.models</span> <span class="k">import</span> <span class="n">MyModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance</span> <span class="o">=</span> <span class="n">MyModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">size</span>
+</pre></div>
+</div>
+<p>Assigns a file object on assignment so you can do:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/path/to/hello.world&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">instance</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.DesignAsset.get_keywordsfield_name">
+<code class="descname">get_keywordsfield_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.DesignAsset.get_keywordsfield_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignAsset.id">
+<code class="descname">id</code><a class="headerlink" href="#mukluk.models.DesignAsset.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignAsset.keywords">
+<code class="descname">keywords</code><a class="headerlink" href="#mukluk.models.DesignAsset.keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the one-to-many relation created
+by GenericRelation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">GenericRelation</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">post.comments</span></code> is a ReverseGenericManyToOneDescriptor instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignAsset.keywords_string">
+<code class="descname">keywords_string</code><a class="headerlink" href="#mukluk.models.DesignAsset.keywords_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignAsset.objects">
+<code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#mukluk.models.DesignAsset.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.models.DesignedProduct">
+<em class="property">class </em><code class="descname">DesignedProduct</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.DesignedProduct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.Displayable</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.RichText</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.ContentTyped</span></code></p>
+<p>Bringing together the Inventory and Designs to create a user designed product</p>
+<dl class="exception">
+<dt id="mukluk.models.DesignedProduct.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#mukluk.models.DesignedProduct.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="mukluk.models.DesignedProduct.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#mukluk.models.DesignedProduct.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.base">
+<code class="descname">base</code><a class="headerlink" href="#mukluk.models.DesignedProduct.base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.base_id">
+<code class="descname">base_id</code><a class="headerlink" href="#mukluk.models.DesignedProduct.base_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.design_assets">
+<code class="descname">design_assets</code><a class="headerlink" href="#mukluk.models.DesignedProduct.design_assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.DesignedProduct.get_absolute_url">
+<code class="descname">get_absolute_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.DesignedProduct.get_absolute_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise an error if called on a subclass without
+<code class="docutils literal notranslate"><span class="pre">get_absolute_url</span></code> defined, to ensure all search results
+contains a URL.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.DesignedProduct.get_keywordsfield_name">
+<code class="descname">get_keywordsfield_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.DesignedProduct.get_keywordsfield_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.DesignedProduct.get_status_display">
+<code class="descname">get_status_display</code><span class="sig-paren">(</span><em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.DesignedProduct.get_status_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.id">
+<code class="descname">id</code><a class="headerlink" href="#mukluk.models.DesignedProduct.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.image">
+<code class="descname">image</code><a class="headerlink" href="#mukluk.models.DesignedProduct.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first image associated with the DesignedProduct</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.images">
+<code class="descname">images</code><a class="headerlink" href="#mukluk.models.DesignedProduct.images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.keywords">
+<code class="descname">keywords</code><a class="headerlink" href="#mukluk.models.DesignedProduct.keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the one-to-many relation created
+by GenericRelation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">GenericRelation</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">post.comments</span></code> is a ReverseGenericManyToOneDescriptor instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.keywords_string">
+<code class="descname">keywords_string</code><a class="headerlink" href="#mukluk.models.DesignedProduct.keywords_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.markup">
+<code class="descname">markup</code><a class="headerlink" href="#mukluk.models.DesignedProduct.markup" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.DesignedProduct.price">
+<code class="descname">price</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.DesignedProduct.price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.DesignedProduct.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.DesignedProduct.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set default for <code class="docutils literal notranslate"><span class="pre">publish_date</span></code>. We can’t use <code class="docutils literal notranslate"><span class="pre">auto_now_add</span></code> on
+the field as it will be blank when a blog post is created from
+the quick blog form in the admin dashboard.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.site">
+<code class="descname">site</code><a class="headerlink" href="#mukluk.models.DesignedProduct.site" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.sku">
+<code class="descname">sku</code><a class="headerlink" href="#mukluk.models.DesignedProduct.sku" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.vendor_shop">
+<code class="descname">vendor_shop</code><a class="headerlink" href="#mukluk.models.DesignedProduct.vendor_shop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProduct.vendor_shop_id">
+<code class="descname">vendor_shop_id</code><a class="headerlink" href="#mukluk.models.DesignedProduct.vendor_shop_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.models.DesignedProductImage">
+<em class="property">class </em><code class="descname">DesignedProductImage</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.DesignedProductImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.Orderable</span></code></p>
+<p>An image for a DesignedProduct. Heavily borrows from the
+core ProductImage model.DesignedProduct</p>
+<dl class="exception">
+<dt id="mukluk.models.DesignedProductImage.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#mukluk.models.DesignedProductImage.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="mukluk.models.DesignedProductImage.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#mukluk.models.DesignedProductImage.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProductImage.description">
+<code class="descname">description</code><a class="headerlink" href="#mukluk.models.DesignedProductImage.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProductImage.designed_product">
+<code class="descname">designed_product</code><a class="headerlink" href="#mukluk.models.DesignedProductImage.designed_product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProductImage.designed_product_id">
+<code class="descname">designed_product_id</code><a class="headerlink" href="#mukluk.models.DesignedProductImage.designed_product_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProductImage.file">
+<code class="descname">file</code><a class="headerlink" href="#mukluk.models.DesignedProductImage.file" title="Permalink to this definition">¶</a></dt>
+<dd><p>The descriptor for the file attribute on the model instance. Returns a
+FieldFile when accessed so you can do stuff like:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">myapp.models</span> <span class="k">import</span> <span class="n">MyModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance</span> <span class="o">=</span> <span class="n">MyModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">size</span>
+</pre></div>
+</div>
+<p>Assigns a file object on assignment so you can do:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/path/to/hello.world&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">instance</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProductImage.id">
+<code class="descname">id</code><a class="headerlink" href="#mukluk.models.DesignedProductImage.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProductImage.objects">
+<code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#mukluk.models.DesignedProductImage.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.DesignedProductImage.order_with_respect_to">
+<code class="descname">order_with_respect_to</code><em class="property"> = 'designed_product'</em><a class="headerlink" href="#mukluk.models.DesignedProductImage.order_with_respect_to" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.models.Profile">
+<em class="property">class </em><code class="descname">Profile</code><span class="sig-paren">(</span><em>id</em>, <em>created</em>, <em>updated</em>, <em>user</em>, <em>date_of_birth</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.Profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.TimeStamped</span></code></p>
+<dl class="exception">
+<dt id="mukluk.models.Profile.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#mukluk.models.Profile.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="mukluk.models.Profile.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#mukluk.models.Profile.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Profile.date_of_birth">
+<code class="descname">date_of_birth</code><a class="headerlink" href="#mukluk.models.Profile.date_of_birth" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Profile.id">
+<code class="descname">id</code><a class="headerlink" href="#mukluk.models.Profile.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Profile.objects">
+<code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#mukluk.models.Profile.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Profile.user">
+<code class="descname">user</code><a class="headerlink" href="#mukluk.models.Profile.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">restaurant.place</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardOneToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Profile.user_id">
+<code class="descname">user_id</code><a class="headerlink" href="#mukluk.models.Profile.user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.Profile.vendor_shops">
+<code class="descname">vendor_shops</code><a class="headerlink" href="#mukluk.models.Profile.vendor_shops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.models.VendorShop">
+<em class="property">class </em><code class="descname">VendorShop</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.VendorShop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.RichText</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">mezzanine.core.models.Displayable</span></code></p>
+<p>Vendor shops for designed products</p>
+<dl class="exception">
+<dt id="mukluk.models.VendorShop.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#mukluk.models.VendorShop.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="mukluk.models.VendorShop.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#mukluk.models.VendorShop.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.VendorShop.designed_products">
+<code class="descname">designed_products</code><a class="headerlink" href="#mukluk.models.VendorShop.designed_products" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.VendorShop.get_absolute_url">
+<code class="descname">get_absolute_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.VendorShop.get_absolute_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise an error if called on a subclass without
+<code class="docutils literal notranslate"><span class="pre">get_absolute_url</span></code> defined, to ensure all search results
+contains a URL.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.VendorShop.get_keywordsfield_name">
+<code class="descname">get_keywordsfield_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.VendorShop.get_keywordsfield_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mukluk.models.VendorShop.get_status_display">
+<code class="descname">get_status_display</code><span class="sig-paren">(</span><em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.VendorShop.get_status_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.VendorShop.id">
+<code class="descname">id</code><a class="headerlink" href="#mukluk.models.VendorShop.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.VendorShop.keywords">
+<code class="descname">keywords</code><a class="headerlink" href="#mukluk.models.VendorShop.keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the one-to-many relation created
+by GenericRelation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">GenericRelation</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">post.comments</span></code> is a ReverseGenericManyToOneDescriptor instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.VendorShop.keywords_string">
+<code class="descname">keywords_string</code><a class="headerlink" href="#mukluk.models.VendorShop.keywords_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.VendorShop.site">
+<code class="descname">site</code><a class="headerlink" href="#mukluk.models.VendorShop.site" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.VendorShop.vendor">
+<code class="descname">vendor</code><a class="headerlink" href="#mukluk.models.VendorShop.vendor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.models.VendorShop.vendor_id">
+<code class="descname">vendor_id</code><a class="headerlink" href="#mukluk.models.VendorShop.vendor_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mukluk.models.mukluk_add_item">
+<code class="descname">mukluk_add_item</code><span class="sig-paren">(</span><em>self</em>, <em>variation</em>, <em>designed_product</em>, <em>quantity</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.models.mukluk_add_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modifies the Cartidge’s Cart model to enable it to add
+DesignedProducts to the Cart.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mukluk.settings">
+<span id="mukluk-settings-module"></span><h2>mukluk.settings module<a class="headerlink" href="#module-mukluk.settings" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="mukluk.settings.get_env_variable">
+<code class="descname">get_env_variable</code><span class="sig-paren">(</span><em>var_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.settings.get_env_variable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-mukluk.urls">
+<span id="mukluk-urls-module"></span><h2>mukluk.urls module<a class="headerlink" href="#module-mukluk.urls" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mukluk.views">
+<span id="mukluk-views-module"></span><h2>mukluk.views module<a class="headerlink" href="#module-mukluk.views" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mukluk.views.ShopContent">
+<em class="property">class </em><code class="descname">ShopContent</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.views.ShopContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.list.ListView</span></code></p>
+<dl class="method">
+<dt id="mukluk.views.ShopContent.get_queryset">
+<code class="descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.views.ShopContent.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of items for this view.</p>
+<p>The return value must be an iterable and may be an instance of
+<cite>QuerySet</cite> in which case <cite>QuerySet</cite> specific behavior will be enabled.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.views.ShopContent.model">
+<code class="descname">model</code><a class="headerlink" href="#mukluk.views.ShopContent.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mukluk.models.DesignedProduct" title="mukluk.models.DesignedProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">mukluk.models.DesignedProduct</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mukluk.views.ShopContent.template_name">
+<code class="descname">template_name</code><em class="property"> = 'mukluk/usershopcontent_list.html'</em><a class="headerlink" href="#mukluk.views.ShopContent.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mukluk.views.ShopList">
+<em class="property">class </em><code class="descname">ShopList</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.views.ShopList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.list.ListView</span></code></p>
+<dl class="attribute">
+<dt id="mukluk.views.ShopList.model">
+<code class="descname">model</code><a class="headerlink" href="#mukluk.views.ShopList.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mukluk.models.VendorShop" title="mukluk.models.VendorShop"><code class="xref py py-class docutils literal notranslate"><span class="pre">mukluk.models.VendorShop</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mukluk.views.designed_product">
+<code class="descname">designed_product</code><span class="sig-paren">(</span><em>request</em>, <em>product_slug</em>, <em>shop_slug</em>, <em>template='mukluk/designed_product.html'</em>, <em>form_class=&lt;class 'cartridge.shop.forms.AddProductForm'&gt;</em>, <em>extra_context=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.views.designed_product" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mukluk.views.mukluk_complete">
+<code class="descname">mukluk_complete</code><span class="sig-paren">(</span><em>request</em>, <em>template='shop/complete.html'</em>, <em>extra_context=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mukluk.views.mukluk_complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Redirected to once an order is complete - pass the order object
+for tracking items via Google Anayltics, and displaying in
+the template if required.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mukluk.wsgi">
+<span id="mukluk-wsgi-module"></span><h2>mukluk.wsgi module<a class="headerlink" href="#module-mukluk.wsgi" title="Permalink to this headline">¶</a></h2>
+<p>WSGI config for mukluk project.</p>
+<p>It exposes the WSGI callable as a module-level variable named <code class="docutils literal notranslate"><span class="pre">application</span></code>.</p>
+<p>For more information on this file, see
+<a class="reference external" href="https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/">https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/</a></p>
+</div>
+<div class="section" id="module-mukluk">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mukluk" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Mukluk</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/quickstart.html">Quick Start Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cartridge/overrides.html">Overrides of the Cartridge and Mezzanine Core</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">mukluk</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mukluk package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">mukluk</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">mukluk</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Thomas Schmitt.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.8</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/mukluk.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
