@@ -154,6 +154,10 @@ class DesignAsset(TimeStamped, MetaData):
 # system into a marketplace platform. Some of the core isn't, so
 # this is where all the needed monkey patches for the Cartridge models
 # reside.
+#
+# Todo: Instead of monkey-patching, we could also create a custom
+# object passed to the core add_item-method that includes all desired
+# information. This seems to be the more future-proof solution.
 
 def mukluk_add_item(self, variation, designed_product, quantity):
         """

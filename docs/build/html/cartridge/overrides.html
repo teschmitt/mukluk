@@ -1,37 +1,162 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Overrides of the Cartridge and Mezzanine Core &#8212; Mukluk 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Overrides of the Cartridge and Mezzanine Core &mdash; Mukluk 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="mukluk" href="../modules.html" />
-    <link rel="prev" title="Quick Start Reference" href="../usage/quickstart.html" />
+    <link rel="next" title="Reference" href="reference.html" />
+    <link rel="prev" title="Cartridge Integration Hooks" href="integration.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
    
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  <div class="wy-grid-for-nav">
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
           
 
-          <div class="body" role="main">
+          
+            <a href="../index.html" class="icon icon-home"> Mukluk
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/quickstart.html">Quick Start Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Cartridge Integration Hooks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overrides of the Cartridge and Mezzanine Core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#skus">SKUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#designed-products">Designed Products</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">mukluk</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mukluk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Overrides of the Cartridge and Mezzanine Core</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/cartridge/overrides.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="overrides-of-the-cartridge-and-mezzanine-core">
 <h1>Overrides of the Cartridge and Mezzanine Core<a class="headerlink" href="#overrides-of-the-cartridge-and-mezzanine-core" title="Permalink to this headline">¶</a></h1>
@@ -56,7 +181,7 @@
 <blockquote>
 <div><ul>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="../mukluk.html#module-mukluk.models" title="mukluk.models"><code class="xref py py-mod docutils literal notranslate"><span class="pre">models</span></code></a></dt>
+<dt><a class="reference internal" href="../mukluk.html#module-mukluk.models" title="mukluk.models"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mukluk.models</span></code></a></dt>
 <dd><dl class="first function">
 <dt>
 <code class="descname">mukluk_add_item</code><span class="sig-paren">(</span><em>self</em>, <em>variation</em>, <em>designed_product</em>, <em>quantity</em><span class="sig-paren">)</span></dt>
@@ -64,12 +189,13 @@
 DesignedProducts to the Cart.</p>
 </dd></dl>
 
-<p class="last">Replaces core <code class="xref py py-meth docutils literal notranslate"><span class="pre">Cart.add_item()</span></code></p>
+<p>Replaces core <code class="xref py py-meth docutils literal notranslate"><span class="pre">Cart.add_item()</span></code></p>
+<p class="last">Todo: Instead of monkey-patching, we could also create a custom object passed to the core add_item()-method that includes all desired information. This seems to be the more future-proof solution.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="../mukluk.html#module-mukluk.views" title="mukluk.views"><code class="xref py py-mod docutils literal notranslate"><span class="pre">views</span></code></a></dt>
+<dt><a class="reference internal" href="../mukluk.html#module-mukluk.views" title="mukluk.views"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mukluk.views</span></code></a></dt>
 <dd><dl class="first function">
 <dt>
 <code class="descname">mukluk_complete</code><span class="sig-paren">(</span><em>request</em>, <em>template='shop/complete.html'</em>, <em>extra_context=None</em><span class="sig-paren">)</span></dt>
@@ -90,7 +216,7 @@ the template if required.</p>
 <blockquote>
 <div><ul>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="../mukluk.html#module-mukluk.views" title="mukluk.views"><code class="xref py py-mod docutils literal notranslate"><span class="pre">views</span></code></a></dt>
+<dt><a class="reference internal" href="../mukluk.html#module-mukluk.views" title="mukluk.views"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mukluk.views</span></code></a></dt>
 <dd><dl class="first function">
 <dt>
 <code class="descname">designed_product</code><span class="sig-paren">(</span><em>request</em>, <em>product_slug</em>, <em>shop_slug</em>, <em>template='mukluk/designed_product.html'</em>, <em>form_class=&lt;class 'cartridge.shop.forms.AddProductForm'&gt;</em>, <em>extra_context=None</em><span class="sig-paren">)</span></dt>
@@ -98,11 +224,133 @@ the template if required.</p>
 
 <p>Gets called to display the product page for a <a class="reference internal" href="../mukluk.html#mukluk.models.DesignedProduct" title="mukluk.models.DesignedProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">DesignedProduct</span></code></a></p>
 <p>The only real changes are in the function definition (<code class="docutils literal notranslate"><span class="pre">product_slug</span></code> and <code class="docutils literal notranslate"><span class="pre">shop_slug</span></code> parameters) and right in the beginning, where the DesignedProduct has to be fetched as well for further processing (cart, order, etc):</p>
-<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">published_dps</span> <span class="o">=</span> <span class="n">DesignedProduct</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">(</span><span class="n">for_user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
-<span class="n">designed_product</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">published_dps</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="n">product_slug</span><span class="p">)</span>
-<span class="n">base</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Product</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="n">designed_product</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">slug</span><span class="p">)</span>
+<div class="last highlight-python3 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="k">def</span> <span class="nf">designed_product</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">product_slug</span><span class="p">,</span> <span class="n">shop_slug</span><span class="p">,</span>
+</span><span class="hll">                     <span class="n">template</span><span class="o">=</span><span class="s2">&quot;mukluk/designed_product.html&quot;</span><span class="p">,</span>
+</span>                     <span class="n">form_class</span><span class="o">=</span><span class="n">AddProductForm</span><span class="p">,</span> <span class="n">extra_context</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="hll">    <span class="n">published_dps</span> <span class="o">=</span> <span class="n">DesignedProduct</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">(</span><span class="n">for_user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">designed_product</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">published_dps</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="n">product_slug</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">base</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Product</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="n">designed_product</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">slug</span><span class="p">)</span>
+</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">ProductVariation</span><span class="o">.</span><span class="n">option_fields</span><span class="p">()]</span>
+<span class="hll">    <span class="n">variations</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">variations</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</span>    <span class="n">variations_json</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">([</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="p">[(</span><span class="n">f</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;sku&quot;</span><span class="p">,</span> <span class="s2">&quot;image_id&quot;</span><span class="p">]])</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variations</span><span class="p">])</span>
+    <span class="n">to_cart</span> <span class="o">=</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span> <span class="ow">and</span>
+               <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;add_wishlist&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">initial_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">variations</span><span class="p">:</span>
+        <span class="n">initial_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">f</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">variations</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">))</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">])</span>
+    <span class="n">initial_data</span><span class="p">[</span><span class="s2">&quot;quantity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="hll">    <span class="n">add_product_form</span> <span class="o">=</span> <span class="n">form_class</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="n">product</span><span class="o">=</span><span class="n">base</span><span class="p">,</span>
+</span>                                  <span class="n">initial</span><span class="o">=</span><span class="n">initial_data</span><span class="p">,</span> <span class="n">to_cart</span><span class="o">=</span><span class="n">to_cart</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">add_product_form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">to_cart</span><span class="p">:</span>
+                <span class="n">quantity</span> <span class="o">=</span> <span class="n">add_product_form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s2">&quot;quantity&quot;</span><span class="p">]</span>
+                <span class="n">request</span><span class="o">.</span><span class="n">cart</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span>
+<span class="hll">                    <span class="n">add_product_form</span><span class="o">.</span><span class="n">variation</span><span class="p">,</span> <span class="n">designed_product</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span>
+</span>                <span class="n">recalculate_cart</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+                <span class="n">info</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Item added to cart&quot;</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;shop_cart&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">skus</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">wishlist</span>
+                <span class="n">sku</span> <span class="o">=</span> <span class="n">add_product_form</span><span class="o">.</span><span class="n">variation</span><span class="o">.</span><span class="n">sku</span>
+                <span class="k">if</span> <span class="n">sku</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">skus</span><span class="p">:</span>
+                    <span class="n">skus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sku</span><span class="p">)</span>
+                <span class="n">info</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Item added to wishlist&quot;</span><span class="p">))</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;shop_wishlist&quot;</span><span class="p">)</span>
+                <span class="n">set_cookie</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">&quot;wishlist&quot;</span><span class="p">,</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">skus</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">response</span>
+
+    <span class="c1"># related = []</span>
+    <span class="c1"># if settings.SHOP_USE_RELATED_PRODUCTS:</span>
+    <span class="c1">#     related = product.related_products.published(for_user=request.user)</span>
+
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+<span class="hll">        <span class="s2">&quot;designed_product&quot;</span><span class="p">:</span> <span class="n">designed_product</span><span class="p">,</span>
+</span><span class="hll">        <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="n">base</span><span class="p">,</span>
+</span>        <span class="s2">&quot;editable_obj&quot;</span><span class="p">:</span> <span class="n">designed_product</span><span class="p">,</span>
+<span class="hll">        <span class="s2">&quot;images&quot;</span><span class="p">:</span> <span class="n">designed_product</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span>
+</span>        <span class="s2">&quot;variations&quot;</span><span class="p">:</span> <span class="n">variations</span><span class="p">,</span>
+        <span class="s2">&quot;variations_json&quot;</span><span class="p">:</span> <span class="n">variations_json</span><span class="p">,</span>
+        <span class="s2">&quot;has_available_variations&quot;</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="n">v</span><span class="o">.</span><span class="n">has_price</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variations</span><span class="p">]),</span>
+        <span class="c1"># &quot;related_products&quot;: related,</span>
+        <span class="s2">&quot;add_product_form&quot;</span><span class="p">:</span> <span class="n">add_product_form</span>
+    <span class="p">}</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_context</span> <span class="ow">or</span> <span class="p">{})</span>
+
+<span class="hll">    <span class="n">templates</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">&quot;mukluk/</span><span class="si">%s</span><span class="s2">.html&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">designed_product</span><span class="o">.</span><span class="n">slug</span><span class="p">),</span> <span class="n">template</span><span class="p">]</span>
+</span>    <span class="c1"># Check for a template matching the page&#39;s content model.</span>
+    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">designed_product</span><span class="p">,</span> <span class="s1">&#39;content_model&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="hll">        <span class="n">templates</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;shop/products/</span><span class="si">%s</span><span class="s2">.html&quot;</span> <span class="o">%</span> <span class="n">designed_product</span><span class="o">.</span><span class="n">content_model</span><span class="p">)</span>
+</span>
+    <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">templates</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </dd>
 </dl>
 </li>
@@ -112,73 +360,68 @@ the template if required.</p>
 </div>
 
 
+           </div>
+           
           </div>
-          
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reference.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="integration.html" class="btn btn-neutral" title="Cartridge Integration Hooks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Thomas Schmitt.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">Mukluk</a></h1>
+
+    </section>
+
+  </div>
+  
 
 
+  
 
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
 
+  
 
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-<h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../usage/quickstart.html">Quick Start Reference</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Overrides of the Cartridge and Mezzanine Core</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#skus">SKUs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#designed-products">Designed Products</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">mukluk</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../usage/quickstart.html" title="previous chapter">Quick Start Reference</a></li>
-      <li>Next: <a href="../modules.html" title="next chapter">mukluk</a></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2018, Thomas Schmitt.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.8</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
-      
-      |
-      <a href="../_sources/cartridge/overrides.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

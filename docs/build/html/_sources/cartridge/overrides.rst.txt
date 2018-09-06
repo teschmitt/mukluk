@@ -22,13 +22,15 @@ followed by a minus/hyphen (`-`) and then part
 
 Modifying the SKUs in this ways screws up some of Cartridge's core that is responsible for filtering cart or order items based on the SKU. These workarounds take care of maintaining regular functionality:
 
-    * :mod:`.models`
+    * :mod:`.mukluk.models`
         .. autofunction:: mukluk.models.mukluk_add_item
             :noindex:
 
-        Replaces core :meth:`Cart.add_item`
+        Replaces core :meth:`.Cart.add_item`
 
-    * :mod:`.views`
+        Todo: Instead of monkey-patching, we could also create a custom object passed to the core add_item()-method that includes all desired information. This seems to be the more future-proof solution.
+
+    * :mod:`.mukluk.views`
         .. autofunction:: mukluk.views.mukluk_complete
             :noindex:
 
@@ -37,7 +39,7 @@ Modifying the SKUs in this ways screws up some of Cartridge's core that is respo
 Designed Products
 =================
 
-    * :mod:`.views`
+    * :mod:`.mukluk.views`
         .. autofunction:: mukluk.views.designed_product
             :noindex:
 
@@ -45,9 +47,7 @@ Designed Products
 
         The only real changes are in the function definition (``product_slug`` and ``shop_slug`` parameters) and right in the beginning, where the DesignedProduct has to be fetched as well for further processing (cart, order, etc):
 
-        .. code-block:: python
-
-            published_dps = DesignedProduct.objects.published(for_user=request.user)
-            designed_product = get_object_or_404(published_dps, slug=product_slug)
-            base = get_object_or_404(Product, slug=designed_product.base.slug)
-
+        .. literalinclude:: ../../../mukluk/views.py
+           :pyobject: designed_product
+           :linenos:
+           :emphasize-lines: 1,2,4-6,9,20,27,46,47,49,58,61

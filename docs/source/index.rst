@@ -12,7 +12,9 @@ Welcome to Mukluk's documentation!
 
    usage/installation
    usage/quickstart
+   cartridge/integration
    cartridge/overrides
+   cartridge/reference
    modules
 
 
