@@ -22,8 +22,16 @@ except (ImportError, SyntaxError):
 HAS_PDF = pisa is not None
 
 
-class ShopList(ListView):
-    model = VendorShop
+def marketplace(request, template='mukluk/marketplace.html', extra_context=None):
+    """
+    Main view function to display (featured) designed products
+    """
+    published_dps = DesignedProduct.objects.published(for_user=request.user)
+    context = {
+        'products': published_dps,
+    }
+    context.update(extra_context or {})
+    return TemplateResponse(request, template, context)
 
 
 class ShopContent(ListView):

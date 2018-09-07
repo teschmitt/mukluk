@@ -86,6 +86,9 @@ class DesignedProduct(Displayable, RichText, ContentTyped):
             # Designed Product has no images
             return None
 
+    def unit_price(self):
+        return self.base.unit_price() + self.markup
+
     def price(self):
         return self.base.price() + self.markup
 
