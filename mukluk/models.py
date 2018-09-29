@@ -24,7 +24,6 @@ class Profile(TimeStamped):
     class Meta:
         verbose_name = _("Profile")
         verbose_name_plural = _("Profiles")
-        app_label = "mukluk"
 
 
 class Brand(Displayable, RichText):
@@ -32,7 +31,6 @@ class Brand(Displayable, RichText):
     class Meta:
         verbose_name = _("Brand")
         verbose_name_plural = _("Brands")
-        app_label = "mukluk"
 
 
 class VendorShop(RichText, Displayable):
@@ -51,60 +49,100 @@ class VendorShop(RichText, Displayable):
     class Meta:
         verbose_name = _("Vendor Shop")
         verbose_name_plural = _("Vendor Shops")
-        app_label = "mukluk"
 
 
-class DesignedProduct(Displayable, RichText, ContentTyped):
+class DesignedProduct(TimeStamped):
     """
-    Bringing together the Inventory and Designs to create a user designed product
+    This Through-Model stores the relationship of user submitted Designs
+    and available Inventory Products. Every combination of Design and Product
+    is represented in one record.user
+
+    Additionally, we store all possible custom product configuration in here:
+        - Markup: Amount the seller earns when DesignedProduct is sold
+        - SKU: Unique identifier of DesignedProduct
+        - AssetPlacement: TODO Infos on how DesignAssets are arranged/placed
     """
 
-    base = models.ForeignKey(
-        Product, related_name="designed_products", on_delete=models.CASCADE)
-    vendor_shop = models.ForeignKey(
-        VendorShop, related_name="designed_products", on_delete=models.CASCADE)
+    design = models.ForeignKey('Design', on_delete=models.CASCADE)
+    base = models.ForeignKey(Product, on_delete=models.CASCADE)
     markup = MoneyField(_('Markup'))
     sku = SKUField(blank=True, null=True)
 
+
+class Design(Displayable, RichText):
+    """
+    Central model for mukluk! Every user created Design is wired to all other
+    parts of the mukluk system here.
+    This model links DesignAssets to DesignAssets, possible base Products, and
+    VendorShops. DesignedProduct stores all possible custom product
+    configurability.
+    """
+
+    possible_products = models.ManyToManyField(
+        Product, related_name='designs',
+        through=DesignedProduct, through_fields=('design', 'base'))
+    vendor_shop = models.ForeignKey(
+        VendorShop, related_name="designs", on_delete=models.CASCADE)
+
     class Meta:
-        verbose_name = _("Designed Product")
-        verbose_name_plural = _("Designed Products")
-        app_label = "mukluk"
+        verbose_name = _("Design")
+        verbose_name_plural = _("Designs")
 
     def __str__(self):
         return self.title
 
-    @property
-    def image(self):
-        """
-        Return the first image associated with the DesignedProduct
-        """
-        try:
-            return DesignedProductImage.objects.filter(
-                designed_product=self)[0] or None
-        except IndexError:
-            # Designed Product has no images
-            return None
 
-    def unit_price(self):
-        return self.base.unit_price() + self.markup
+# class DesignedProduct(Displayable, RichText, ContentTyped):
+#     """
+#     Bringing together the Inventory and Designs to create a user designed
+#     product
+#     """
 
-    def price(self):
-        return self.base.price() + self.markup
+#     base = models.ForeignKey(
+#         Product, related_name="designed_products", on_delete=models.CASCADE)
+#     vendor_shop = models.ForeignKey(
+#         VendorShop, related_name="designed_products", on_delete=models.CASCADE)
+#     markup = MoneyField(_('Markup'))
+#     sku = SKUField(blank=True, null=True)
 
-    def get_absolute_url(self):
-        product_slug = self.slug
-        shop_slug = self.vendor_shop.slug
-        return reverse("designed_product", kwargs={
-            "shop_slug": shop_slug,
-            "product_slug": product_slug})
+#     class Meta:
+#         verbose_name = _("Designed Product")
+#         verbose_name_plural = _("Designed Products")
 
-    def save(self, *args, **kwargs):
-        self.set_content_model()
-        super().save(*args, **kwargs)
-        if not self.sku:
-            self.sku = self.id
-            self.save()
+#     def __str__(self):
+#         return self.title
+
+#     @property
+#     def image(self):
+#         """
+#         Return the first image associated with the DesignedProduct
+#         """
+#         try:
+#             return DesignedProductImage.objects.filter(
+#                 designed_product=self)[0] or None
+#         except IndexError:
+#             # Designed Product has no images
+#             return None
+
+#     def unit_price(self):
+#         return self.base.unit_price() + self.markup
+
+#     def price(self):
+#         return self.base.price() + self.markup
+
+#     def get_absolute_url(self):
+#         product_slug = self.slug
+#         shop_slug = self.vendor_shop.slug
+#         return reverse("designed_product", kwargs={
+#             "shop_slug": shop_slug,
+#             "product_slug": product_slug})
+
+#     def save(self, *args, **kwargs):
+#         self.set_content_model()
+#         super().save(*args, **kwargs)
+#         if not self.sku:
+#             self.sku = self.id
+#             self.save()
 
 
 class DesignedProductImage(Orderable):
@@ -139,8 +177,8 @@ class DesignAsset(TimeStamped, MetaData):
     Still missing:
       - Positioning information
     """
-    designed_product = models.ForeignKey(
-        DesignedProduct, related_name="design_assets", on_delete=models.CASCADE)
+    design = models.ForeignKey(
+        Design, related_name="design_assets", on_delete=models.CASCADE)
     file = FileField(
         _("Asset"), max_length=255, format="Image",
         upload_to=upload_to("shop.DesignAsset.file", "asset"))
@@ -148,7 +186,6 @@ class DesignAsset(TimeStamped, MetaData):
     class Meta:
         verbose_name = _("Design Asset")
         verbose_name_plural = _("Design Assets")
-        app_label = "mukluk"
 
 
 # MONKEY PATCHES OF CORE MODELS
