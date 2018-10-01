@@ -95,6 +95,7 @@ ADMIN_MENU_ORDER = (
         "shop.Sale",
         "shop.Order",)),
     (_("Marketplace"), (
+        "mukluk.Design",
         "mukluk.DesignedProduct",
         "mukluk.VendorShop",)),
     ("Users", (

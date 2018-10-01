@@ -1,4 +1,6 @@
-from django.db import models
+from django.db.models import (
+    ForeignKey, ManyToManyField, CharField, DateField,
+    OneToOneField, CASCADE)
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_text
 
@@ -15,8 +17,8 @@ from cartridge.shop.fields import MoneyField, SKUField
 
 
 class Profile(TimeStamped):
-    user = models.OneToOneField("auth.User")
-    date_of_birth = models.DateField(null=True)
+    user = OneToOneField("auth.User")
+    date_of_birth = DateField(null=True)
 
     def __str__(self):
         return self.user.username
@@ -39,8 +41,8 @@ class VendorShop(RichText, Displayable):
     Vendor shops for designed products
     """
 
-    vendor = models.ForeignKey(
-        Profile, related_name="vendor_shops", on_delete=models.CASCADE)
+    vendor = ForeignKey(
+        Profile, related_name="vendor_shops", on_delete=CASCADE)
 
     def get_absolute_url(self):
         slug = self.slug
@@ -63,10 +65,33 @@ class DesignedProduct(TimeStamped):
         - AssetPlacement: TODO Infos on how DesignAssets are arranged/placed
     """
 
-    design = models.ForeignKey('Design', on_delete=models.CASCADE)
-    base = models.ForeignKey(Product, on_delete=models.CASCADE)
+    design = ForeignKey('Design', on_delete=CASCADE)
+    base = ForeignKey(Product, on_delete=CASCADE)
     markup = MoneyField(_('Markup'))
     sku = SKUField(blank=True, null=True)
+
+    def image(self):
+        """
+        Return the first image associated with the DesignedProduct
+        """
+        try:
+            return DesignedProductImage.objects.filter(
+                designed_product=self)[0] or None
+        except IndexError:
+            # Designed Product has no images
+            return None
+
+    def unit_price(self):
+        return self.base.unit_price() + self.markup
+
+    def price(self):
+        return self.base.price() + self.markup
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if not self.sku:
+            self.sku = self.id
+            self.save()
 
 
 class Design(Displayable, RichText):
@@ -78,11 +103,11 @@ class Design(Displayable, RichText):
     configurability.
     """
 
-    possible_products = models.ManyToManyField(
+    possible_products = ManyToManyField(
         Product, related_name='designs',
         through=DesignedProduct, through_fields=('design', 'base'))
-    vendor_shop = models.ForeignKey(
-        VendorShop, related_name="designs", on_delete=models.CASCADE)
+    vendor_shop = ForeignKey(
+        VendorShop, related_name="designs", on_delete=CASCADE)
 
     class Meta:
         verbose_name = _("Design")
@@ -90,80 +115,6 @@ class Design(Displayable, RichText):
 
     def __str__(self):
         return self.title
-
-
-# class DesignedProduct(Displayable, RichText, ContentTyped):
-#     """
-#     Bringing together the Inventory and Designs to create a user designed
-#     product
-#     """
-
-#     base = models.ForeignKey(
-#         Product, related_name="designed_products", on_delete=models.CASCADE)
-#     vendor_shop = models.ForeignKey(
-#         VendorShop, related_name="designed_products", on_delete=models.CASCADE)
-#     markup = MoneyField(_('Markup'))
-#     sku = SKUField(blank=True, null=True)
-
-#     class Meta:
-#         verbose_name = _("Designed Product")
-#         verbose_name_plural = _("Designed Products")
-
-#     def __str__(self):
-#         return self.title
-
-#     @property
-#     def image(self):
-#         """
-#         Return the first image associated with the DesignedProduct
-#         """
-#         try:
-#             return DesignedProductImage.objects.filter(
-#                 designed_product=self)[0] or None
-#         except IndexError:
-#             # Designed Product has no images
-#             return None
-
-#     def unit_price(self):
-#         return self.base.unit_price() + self.markup
-
-#     def price(self):
-#         return self.base.price() + self.markup
-
-#     def get_absolute_url(self):
-#         product_slug = self.slug
-#         shop_slug = self.vendor_shop.slug
-#         return reverse("designed_product", kwargs={
-#             "shop_slug": shop_slug,
-#             "product_slug": product_slug})
-
-#     def save(self, *args, **kwargs):
-#         self.set_content_model()
-#         super().save(*args, **kwargs)
-#         if not self.sku:
-#             self.sku = self.id
-#             self.save()
-
-
-class DesignedProductImage(Orderable):
-    """
-    An image for a DesignedProduct. Heavily borrows from the
-    core ProductImage model.DesignedProduct
-    """
-    file = FileField(
-        _("Image"), max_length=255, format="Image",
-        upload_to=upload_to("shop.DeisgnedProductImage.file", "product"))
-    description = models.CharField(_("Description"), blank=True, max_length=100)
-    designed_product = models.ForeignKey(DesignedProduct, related_name="images")
-
-    class Meta:
-        verbose_name = _("Image")
-        verbose_name_plural = _("Images")
-        order_with_respect_to = "designed_product"
-
-    def __str__(self):
-        value = self.description or self.file.name or ""
-        return value
 
 
 class DesignAsset(TimeStamped, MetaData):
@@ -177,8 +128,8 @@ class DesignAsset(TimeStamped, MetaData):
     Still missing:
       - Positioning information
     """
-    design = models.ForeignKey(
-        Design, related_name="design_assets", on_delete=models.CASCADE)
+    design = ForeignKey(
+        Design, related_name="design_assets", on_delete=CASCADE)
     file = FileField(
         _("Asset"), max_length=255, format="Image",
         upload_to=upload_to("shop.DesignAsset.file", "asset"))
@@ -186,6 +137,28 @@ class DesignAsset(TimeStamped, MetaData):
     class Meta:
         verbose_name = _("Design Asset")
         verbose_name_plural = _("Design Assets")
+
+
+class DesignedProductImage(Orderable):
+    """
+    An image for a DesignedProduct. Heavily borrows from the
+    core ProductImage model.DesignedProduct
+    """
+
+    designed_product = ForeignKey(DesignedProduct, related_name="images")
+    file = FileField(
+        _("Image"), max_length=255, format="Image",
+        upload_to=upload_to("shop.DeisgnedProductImage.file", "product"))
+    # description = CharField(_("Description"), blank=True, max_length=100)
+
+    class Meta:
+        verbose_name = _("Image")
+        verbose_name_plural = _("Images")
+        order_with_respect_to = "designed_product"
+
+    def __str__(self):
+        value = self.description or self.file.name or ""
+        return value
 
 
 # MONKEY PATCHES OF CORE MODELS
