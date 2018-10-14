@@ -1,7 +1,9 @@
 from copy import deepcopy
 
-from django.contrib.admin import ModelAdmin, TabularInline, site
+from django.contrib.admin import TabularInline, site
 from django.db.models import ImageField
+from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_text
 
 from mezzanine.core.admin import (
     DisplayableAdmin, TabularDynamicInlineAdmin)
@@ -10,8 +12,9 @@ from cartridge.shop.admin import ProductAdmin
 from cartridge.shop.forms import ImageWidget
 from cartridge.shop.models import Product
 
+from mukluk.forms import DesignAdminForm
 from mukluk.models import (
-    VendorShop, Design, DesignAsset, Brand, DesignAsset,
+    VendorShop, Design, DesignAsset, Brand,
     DesignedProductImage, DesignedProduct)
 
 
@@ -20,8 +23,12 @@ shop_extra_fieldsets = ((None, {"fields": ("vendor", "content")}),)
 product_fieldsets = deepcopy(ProductAdmin.fieldsets)
 product_fieldsets[0][1]["fields"].insert(1, "brand")
 
-design_fieldsets = deepcopy(DisplayableAdmin.fieldsets)
+# designed_product_fields = [force_text(p) for p in Product.objects.all()]
+design_fieldsets = list(deepcopy(DisplayableAdmin.fieldsets))
 design_fieldsets[0][1]["fields"].extend(['content'])
+design_fieldsets.insert(50, (
+    _("Select Products available with this Design"),
+    {"classes": ("create-designedproducts",), "fields": ["base"]}))
 
 
 class DesignAssetAdmin(TabularDynamicInlineAdmin):
@@ -48,13 +55,9 @@ class MuklukProductAdmin(ProductAdmin):
 
 
 class DesignAdmin(DisplayableAdmin):
-    inlines = (DesignAssetAdmin, DesignedProductAdmin,)
+    inlines = (DesignAssetAdmin,)
+    form = DesignAdminForm
     fieldsets = design_fieldsets
-
-
-# class DesignAssetAdmin(TabularDynamicInlineAdmin):
-#     model = DesignAsset
-#     formfield_overrides = {ImageField: {"widget": ImageWidget}}
 
 
 site.unregister(Product)
