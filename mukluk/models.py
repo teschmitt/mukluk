@@ -15,6 +15,8 @@ from mezzanine.utils.models import upload_to
 from cartridge.shop.models import Product, Priced, Cart
 from cartridge.shop.fields import MoneyField, SKUField
 
+from mukluk import managers
+
 
 class Profile(TimeStamped):
     user = OneToOneField("auth.User")
@@ -65,10 +67,13 @@ class DesignedProduct(TimeStamped):
         - AssetPlacement: TODO Infos on how DesignAssets are arranged/placed
     """
 
-    design = ForeignKey('Design', on_delete=CASCADE)
+    design = ForeignKey(
+        'Design', on_delete=CASCADE, related_name='designed_products')
     base = ForeignKey(Product, on_delete=CASCADE)
     markup = MoneyField(_('Markup'))
     sku = SKUField(blank=True, null=True)
+
+    objects = managers.DesignedProductManager()
 
     def image(self):
         """
@@ -108,6 +113,13 @@ class Design(Displayable, RichText):
         through=DesignedProduct, through_fields=('design', 'base'))
     vendor_shop = ForeignKey(
         VendorShop, related_name="designs", on_delete=CASCADE)
+
+    def get_absolute_url(self):
+        design_slug = self.slug
+        shop_slug = self.vendor_shop.slug
+        return reverse("design", kwargs={
+            "design_slug": design_slug,
+            "shop_slug": shop_slug})
 
     class Meta:
         verbose_name = _("Design")

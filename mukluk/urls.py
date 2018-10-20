@@ -12,7 +12,7 @@ from cartridge.shop import views
 from cartridge.shop.views import order_history
 
 from mukluk.views import (
-    marketplace, ShopContent, designed_product, mukluk_complete)
+    marketplace, ShopContent, design, mukluk_complete)
 
 admin.autodiscover()
 _slash = "/" if settings.APPEND_SLASH else ""
@@ -34,8 +34,8 @@ if settings.USE_MODELTRANSLATION:
 
 urlpatterns += [
     url(r'^marketplace/$', marketplace, name='marketplace'),
-    url(r'^shop/(?P<shop_slug>[\w-]+)/product/(?P<product_slug>[\w-]+)/$',
-        designed_product, name='designed_product'),
+    url(r'^shop/(?P<shop_slug>[\w-]+)/design/(?P<design_slug>[\w-]+)/$',
+        design, name='design'),
     url(r'^shop/(?P<shop_slug>[\w-]+)/all/$',
         ShopContent.as_view(), name='shop_content'),
     # replaces core complete view:

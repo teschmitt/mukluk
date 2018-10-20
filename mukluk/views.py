@@ -43,7 +43,7 @@ class ShopContent(ListView):
         return DesignedProduct.objects.filter(vendor_shop__slug=slug)
 
 
-def designed_product(request, product_slug, shop_slug,
+def design(request, product_slug, shop_slug,
                      template="mukluk/designed_product.html",
                      form_class=AddProductForm, extra_context=None):
     published_dps = DesignedProduct.objects.published(for_user=request.user)
