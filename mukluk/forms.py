@@ -34,5 +34,5 @@ class DesignAdminForm(forms.ModelForm, metaclass=DesignAdminFormMetaclass):
 
         """
         super(DesignAdminForm, self).__init__(*args, **kwargs)
-        base_products = list(p['title'] for p in Product.objects.values('title'))
-        self.fields['base'].choices = make_choices(base_products)
+        base_products = list((p['id'], p['title']) for p in Product.objects.values('id', 'title'))
+        self.fields['base'].choices = base_products

@@ -81,13 +81,13 @@ class DesignAdmin(DisplayableAdmin):
 
     def save_formset(self, request, form, formset, change):
         design = self.model.objects.get(id=self._design_id)
-        print('Running trough {}'.format(formset.model))
-        # if formset.model == DesignAsset:
-        #     super(DesignAdmin, self).save_formset(request, form, formset,
-        #                                           change)
+        super(DesignAdmin, self).save_formset(request, form, formset, change)
+
         if formset.model == DesignedProduct:
             bases = request.POST.getlist('base')
-            design.designed_products.create_from_bases(bases)
+            design.designed_products.create_from_bases(
+                design=design, bases=bases)
+
 
 site.unregister(Product)
 site.register(Product, MuklukProductAdmin)
